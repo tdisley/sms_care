@@ -7,13 +7,13 @@ get '/' do
 end
 
 post '/' do
-  secret = params[:secret]
-  from = params[:from]
-  message = params[:message]
-  sent_timestamp = params[:sent_timestamp]
-  sent_to = params[:sent_to]
-  message_id = params[:message_id]
-  device_id = params[:device_id]
+  secret = params['secret']
+  from = params['from']
+  message = params['message']
+  sent_timestamp = params['sent_timestamp']
+  sent_to = params['sent_to']
+  message_id = params['message_id']
+  device_id = params['device_id']
   puts "#{secret}|#{from}|#{message}|#{sent_timestamp}|#{sent_to}|#{message_id}|#{device_id}"
   content_type :json
   {
