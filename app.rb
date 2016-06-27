@@ -20,7 +20,15 @@ post '/' do
     "payload" =>
     {
       "success" => true,
-      "error" => nil
+      "error" => nil,
+      "task": "send",
+      "messages": [
+        {
+          "to": "#{from}",
+          "message": "Replying from intelligence",
+          "uuid": "#{message_id}"
+        }
+      ]
     }
   }.to_json
 end
