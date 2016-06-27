@@ -1,8 +1,13 @@
 require 'sinatra'
 
 get '/' do
-  "Hello World!"
   prinln params
+  "Hello world"
+end
+
+post '/' do
+  prinln params
+  "Hello world"
 end
 
 post '/callback' do
