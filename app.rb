@@ -7,6 +7,7 @@ get '/' do
 end
 
 post '/' do
+  p params.to_s
   content_type :json
   {
     "payload" =>
