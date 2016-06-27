@@ -1,12 +1,12 @@
 require 'sinatra'
 
 get '/' do
-  prinln params
+  puts "#{params}"
   "Hello world"
 end
 
 post '/' do
-  prinln params
+  puts "#{params}"
   "Hello world"
 end
 
