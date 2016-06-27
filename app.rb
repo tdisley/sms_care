@@ -1,5 +1,10 @@
 require 'sinatra'
+require 'sinatra/activerecord'
 require 'json'
+require './environments'
+
+class Post < ActiveRecord::Base
+end
 
 get '/' do
   puts "#{params}"
