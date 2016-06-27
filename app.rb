@@ -13,7 +13,7 @@ post '/' do
   message = Message.new(params)
   p message
   content_type :json
-  if model.save
+  if message.save
     {
       "payload" =>
       {
