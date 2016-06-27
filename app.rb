@@ -1,14 +1,12 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require './config/environments' #database configuration
+require './models/model'
 require 'json'
-require './environments'
-
-class Post < ActiveRecord::Base
-end
 
 get '/' do
   puts "#{params}"
-  "Hello world"
+  erb :index
 end
 
 post '/' do
