@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 
 get '/' do
   puts "#{params}"
@@ -6,8 +7,14 @@ get '/' do
 end
 
 post '/' do
-  puts "#{params}"
-  "Hello world"
+  content_type :json
+  {
+    "payload" =>
+    {
+      "success" => true,
+      "error" => nil
+    }
+  }.to_json
 end
 
 post '/callback' do
