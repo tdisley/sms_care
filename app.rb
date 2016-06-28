@@ -9,9 +9,9 @@ set :server, 'thin'
 set :sockets, []
 
 get '/' do
-  @messages = Messsage.all
   if !request.websocket?
-    erb :index, { :messages => Message.all }
+    @messages = Message.all
+    erb :index
   else
     request.websocket do |ws|
       ws.onopen do
