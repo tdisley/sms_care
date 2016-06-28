@@ -30,7 +30,7 @@ def success_response(message)
       "messages": [
         {
           "to": "#{message.from}",
-          "message": "Replying from intelligence",
+          "message": AutoResponse.instance.respond_to(message.message),
           "uuid": "#{message.message_id}"
         }
       ]
