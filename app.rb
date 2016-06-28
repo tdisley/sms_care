@@ -3,48 +3,82 @@ require 'sinatra/activerecord'
 require './config/environments' #database configuration
 require './models/message'
 require 'json'
+require 'sinatra-websocket'
+
+set :server, 'thin'
+set :sockets, []
 
 get '/' do
-  puts "#{params}"
-  erb :index
+  if !request.websocket?
+    erb :index, { :messages => Message.all }
+  else
+    request.websocket do |ws|
+      ws.onopen do
+        ws.send("Hello World!")
+        settings.sockets << ws
+      end
+      ws.onmessage do |msg|
+        EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
+      end
+      ws.onclose do
+        warn("wetbsocket closed")
+        settings.sockets.delete(ws)
+      end
+    end
+  end
+end
+
+get '/sample' do
+  msg = "Hello!!!!"
+  EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
+  "sending"
 end
 
 post '/' do
   message = Message.new(params)
-  p message
   content_type :json
   if message.save
-    {
-      "payload" =>
-      {
-        "success" => true,
-        "error" => nil,
-        "task": "send",
-        "messages": [
-          {
-            "to": "#{message.from}",
-            "message": "Replying from intelligence",
-            "uuid": "#{message.message_id}"
-          }
-        ]
-      }
-    }.to_json
+    EM.next_tick { settings.sockets.each{|s| s.send(message) } }
+    success_response(message).to_json
   else
-    {
-      "payload" =>
-      {
-        "success" => false,
-        "error" => "Cannot save the message",
-        "task": "send",
-        "messages": [
-          {
-            "to": "#{message.from}",
-            "message": "Try  again",
-            "uuid": "#{message.message_id}"
-          }
-        ]
-      }
-    }.to_json
+    error_response(message).to_json
   end
+end
+
+private
+def success_response(message)
+  {
+    "payload" =>
+    {
+      "success" => true,
+      "error" => nil,
+      "task": "send",
+      "messages": [
+        {
+          "to": "#{message.from}",
+          "message": "Replying from intelligence",
+          "uuid": "#{message.message_id}"
+        }
+      ]
+    }
+  }
+end
+
+def error_response(message)
+  {
+    "payload" =>
+    {
+      "success" => false,
+      "error" => "Cannot save the message",
+      "task": "send",
+      "messages": [
+        {
+          "to": "#{message.from}",
+          "message": "Try  again",
+          "uuid": "#{message.message_id}"
+        }
+      ]
+    }
+  }
 end
 
