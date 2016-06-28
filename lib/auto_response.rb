@@ -20,7 +20,7 @@ class AutoResponse
     if message
       message[1]
     else
-      "Please write us and include some code: 111 for contact, 222 for ,eet you better, 333 for mor info"
+      "Please write us and include some code: 111 for contact, 222 for meet you better, 333 for mor info"
     end
   end
 
