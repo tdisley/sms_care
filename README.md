@@ -22,3 +22,5 @@ The next features are:
 So, for more information about the use and the contribution, please read the Wiki.
 
 This project was built in the last [MECATE](http://let-emprendimientopublico.mx/es/mecate/) event in Mexico City.
+
+Please read [the Wiki for more information](https://github.com/makingdevs/sms_care/wiki).
