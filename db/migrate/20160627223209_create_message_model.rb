@@ -1,3 +1,4 @@
+# This class is for the automatic creaton of the table in the database
 class CreateMessageModel < ActiveRecord::Migration
   # TODO: Maybe refactor the types
   def change

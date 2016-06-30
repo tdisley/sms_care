@@ -5,22 +5,23 @@ class AutoResponse
   include Singleton
 
   def initialize
-    url = "http://sms-care.makingdevs.com.s3.amazonaws.com/messages.txt"
-    message_text = open(url) { |io| io.read }
-    @responses = {}
-    message_text.split("\n").each do |line|
-      split_message = line.split('|')
-      @responses[split_message[0]] = split_message[1]
+    url = "http://sms-care.makingdevs.com.s3.amazonaws.com/messages.txt" # The URL with the code messages
+    message_text = open(url) { |io| io.read } # Reading the text file
+    @responses = {} # The store of the messages
+    message_text.split("\n").each do |line| # Iterating every line
+      split_message = line.split('|') # Splitting for parsing
+      @responses[split_message[0]] = split_message[1] # Store the message in the HashDict
     end
   end
 
+  # The method to read the message and find the response
   def respond_to(message)
-    code = message.scan(/\d{3}/).first
-    message = @responses.find { |k,v| k == code }
-    if message
-      message[1]
+    code = message.scan(/\d{3}/).first # Searching the message in the SMS
+    message = @responses.find { |k,v| k == code } # Finding the message
+    if message # There's a message in our base of codes?
+      message[1] # Return the message
     else
-      "Please write us and include some code: 111 for contact, 222 for meet you better, 333 for mor info"
+      "Please write us and include some code: 111 for contact, 222 for meet you better, 333 for mor info" # Put a default message
     end
   end
 

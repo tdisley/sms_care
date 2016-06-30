@@ -1,5 +1,6 @@
 require './lib/auto_response'
 
+# The test for verify if the searching of messsages is right
 RSpec.describe AutoResponse do
   [
     ["some 111 some","Thank you for contacting SMS Care. Our team will contact you soon for a free care referral."],
