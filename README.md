@@ -1,6 +1,6 @@
 # SMS Care
 
-This is a project for the [SMS Care organization](http://www.sms-care.org) dedicated _to eliminate all preventable disease un sub-saharan africa_.
+This is a project for the [SMS Care organization](http://www.sms-care.org) dedicated _to eliminate all preventable disease in sub-saharan africa_.
 
 This software is made it for intent to have a continous communication channel, used for intercept messages and respond automatically.
 
