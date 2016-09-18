@@ -21,7 +21,7 @@ class AutoResponse
     if message # There's a message in our base of codes?
       message[1] # Return the message
     else
-      "Please write us and include some code: 111 for contact, 222 for meet you better, 333 for mor info" # Put a default message
+      "Thank you for your message. We will contact you soon with clinic information." # Put a default message
     end
   end
 
